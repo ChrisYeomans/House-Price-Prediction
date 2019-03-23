@@ -1,8 +1,5 @@
-#!/usr/bin/python3
-
-import geohash2
-import sqlite3
-import csv
+#!/usr/bin/env python3
+import geohash2, sqlite3, csv
 from difflib import SequenceMatcher
 
 
@@ -14,15 +11,11 @@ def date_to_days_recip(dat, curr):
 	days_days = int(dat_lst[2])-int(curr_lst[2])
 	return(1/(year_days+month_days+days_days))
 
-
-'''
-The current idea is to compare the geohashed strings to what I already have
-and to use a weighted average based of the ratio the geohashed comparisons
-and also how close the date it to the date of the current date.
-'''
-
-
 def evaluate(inp_str):
+	'''The current idea is to compare the geohashed strings to what I already have
+	and to use a weighted average based of the ratio the geohashed comparisons
+	and also how close the date it to the date of the current date.
+	'''
 	with open(inp_str, encoding="MAC_ROMAN") as house_data:  # reading in the data from the csv
 		my_re = csv.reader(house_data, delimiter=',')
 		rows = []
@@ -86,9 +79,6 @@ def evaluate(inp_str):
 		b = 20
 		if em_dict1 and em_dict2:
 			print(val1*a+val2*b)
-			#print(data[i][2])
-			#print("     ", (data[i][2]-(val1*a+val2*b))
-				  *100/data[i][2], "\n")
 		elif em_dict1:
 			print(val1*a)
 		elif em_dict2:
